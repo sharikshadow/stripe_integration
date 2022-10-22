@@ -32,16 +32,16 @@ class ProductController extends Controller
             //         'quantity' => 2,
             //       ],    
             // ],
-          'line_items' =>[  [
-  "price_data" =>  [
-    "currency" => "INR",
-    "unit_amount" => $request->price * 100,
-    "product_data" =>  [
-      "name" => "test"
-    ]
-    ],
-  "quantity" => 1
-]],
+			'line_items' =>[  [
+				"price_data" =>  [
+				"currency" => "INR",
+				"unit_amount" => $request->price * 100,
+				"product_data" =>  [
+				  "name" => "test"
+				]
+				],
+		  "quantity" => 1
+		]],
 
           
             'mode' => 'payment',
@@ -83,19 +83,5 @@ class ProductController extends Controller
         $products = Product::get();
   
         return view("buy", compact("Product"));
-    }
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function subscription(Request $request)
-    {
-        $Product = Product::find($request->Product);
-  
-        $subscription = $request->user()->newSubscription($request->Product, $Product->stripe_Product)
-                        ->create($request->token);
-  
-        return view("subscription_success");
     }
 }
